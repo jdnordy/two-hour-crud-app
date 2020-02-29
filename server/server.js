@@ -5,7 +5,8 @@ const app = express();
 
 const PORT = 3000;
 
-const db = require('./model');
+// import controllers 
+const tacoController = require('./tacoController');
 
 /**
  * PARSE THE BODY OF REQUEST
@@ -17,7 +18,27 @@ app.use(express.json());
  */
 app.use('/assets', express.static(path.resolve(__dirname, '../client/assets')));
 
+/**
+ * API HANDLERS
+ */
+app.route('/tacos')
+  .get(
+    tacoController.getTacos,
+    (req, res) => {
+      res.status(200).json(res.locals);
+    }
+  )
+  .post(
+    tacoController.addTacos,
+    (req, res) => {
+      res.status(200).json(res.locals);
+    }
+  );
 
+
+/**
+ * SERVE HTML FROM WHICH THE APP HANGS
+ */
 app.get('/', (req, res) => {
   res.sendfile(path.resolve(__dirname, '../client/index.html'));
 });
