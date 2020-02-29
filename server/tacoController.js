@@ -25,7 +25,7 @@ tacoController.addTacos = (req, res, next) => {
 
   db.query(addTacos)
     .then(data => {
-      res.locals.tacos = data.rows[0];
+      res.locals = data.rows[0];
       return next();
     })
     .catch(err => next(err));
@@ -58,7 +58,7 @@ tacoController.updateTacos = (req, res, next) => {
 
   db.query(updateTacos)
     .then(data => {
-      res.locals.tacos = data.rows[0];
+      res.locals = data.rows[0];
       return next();
     })
     .catch(err => next(err));
