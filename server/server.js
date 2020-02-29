@@ -33,14 +33,26 @@ app.route('/tacos')
     (req, res) => {
       res.status(200).json(res.locals);
     }
-  );
+  )
+  .patch(
+    tacoController.updateTacos,
+    (req, res) => {
+      res.status(200).json(res.locals)
+    }
+  )
+  .delete(
+    tacoController.deleteTacos,
+    (req, res) => {
+      res.sendStatus(200)
+    }
+  )
 
 
 /**
  * SERVE HTML FROM WHICH THE APP HANGS
  */
 app.get('/', (req, res) => {
-  res.sendfile(path.resolve(__dirname, '../client/index.html'));
+  res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
 // handler for bad routes
